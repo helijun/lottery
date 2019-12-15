@@ -1,0 +1,9 @@
+
+// index.scss 作为公共引入文件，不允许有实质代码输出
+
+@import "variables";
+@import "mixins";
+@import "functions";
+@import "reset";
+@import "common";
+@import "../view/index"

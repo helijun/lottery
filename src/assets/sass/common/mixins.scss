@@ -1,0 +1,94 @@
+@charset "UTF-8";
+//-----------------------------------------------------
+// mixin scss
+// mixin，通过@include调用，样式通过拷贝的方式使用，尤其适用于传递参数
+// %，通过@extend调用，样式通过组合申明的方式使用，适用于不传参数的代码片段
+
+
+// clearfix
+@mixin clearfix($extend: true) {
+  @if $extend {
+    @extend %clearfix;
+  }
+  @else {
+    &:before,
+    &:after {
+      content: "";
+      display: table;
+    }
+    &:after {
+      clear: both;
+    }
+  }
+}
+
+%clearfix {
+  @include clearfix(false);
+}
+
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+// 既隐藏于视觉也隐藏于屏幕浏览器
+@mixin hidden($extend: true) {
+  @if $extend {
+    @extend %hidden;
+  }
+  @else {
+    display: none !important;
+    visibility: hidden;
+  }
+}
+
+%hidden {
+  @include hidden(false);
+}
+
+// Hide only visually, but have it available for screenreaders
+// 只隐藏于视觉，屏幕浏览器可以阅读
+@mixin hidden-visually($extend: true) {
+  @if $extend {
+    @extend %visually-hidden;
+  }
+  @else {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px); //standard
+  }
+}
+
+%hidden-visually {
+  @include hidden-visually(false);
+}
+
+
+// justify
+@mixin justify($extend: true) {
+  @if $extend {
+    @extend %justify;
+  }
+  @else {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+%justify {
+  @include justify(false);
+}
+
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin circle($size) {
+  @include size($size);
+  border-radius: $size;
+}
+
+%absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
